@@ -20,8 +20,8 @@ async function signIn(method: string, data: FormData) {
     method: "POST",
     body: JSON.stringify({name: data.get('email'), password: data.get('password')}),
   });
-  log(await response.json())
 
+  
   // 4. Handle response: success or error
   if (!response.ok) {
     throw new Error("Failed to sign in.");
@@ -42,8 +42,7 @@ export async function authenticate(_currentState: unknown, formData: FormData) {
     await signIn("credentials", formData);
   } catch (error) {
     if (error) {
-        log(error)
-      switch (error) {
+        switch (error) {
         case "CredentialsSignin":
           return "Invalid credentials.";
         default:
